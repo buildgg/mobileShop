@@ -12,33 +12,21 @@ import java.io.IOException;
  * Created by vov on 04.01.2017.
  */
 @WebFilter("/*")
-public class ErrorHandler implements Filter {
-
+public class ErrorHandler extends AbstractFilter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         try{
             chain.doFilter(request, response);
-
         }catch (Throwable e){
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpServletResponse resp = (HttpServletResponse) response;
-            String requestUri = req.getRequestURI();
+
+            String requestUri = request.getRequestURI();
 
             // Logerrr!!!
 
-            Route.forwarToPage("error.jsp", req, resp);
+            Route.forwarToPage("error.jsp", request, response);
         }
 
     }
 
-    @Override
-    public void destroy() {
-
-    }
 }
