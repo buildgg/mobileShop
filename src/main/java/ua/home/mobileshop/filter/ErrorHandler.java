@@ -11,11 +11,12 @@ import java.io.IOException;
 /**
  * Created by vov on 04.01.2017.
  */
-@WebFilter("/*")
-public class ErrorHandler extends AbstractFilter {
+@WebFilter(urlPatterns = "/")
+public class ErrorHandler extends AbstractFilter implements Filter {
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        System.out.println("HEllo");
         try{
             chain.doFilter(request, response);
         }catch (Throwable e){

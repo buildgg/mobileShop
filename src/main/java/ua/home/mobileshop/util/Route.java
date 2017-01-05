@@ -18,7 +18,8 @@ public final class Route {
 
     public static void forwarToPage(String jspPage, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute(CURRENT_PAGE, "page/" + jspPage);
+
+        request.setAttribute(Route.CURRENT_PAGE, "page/" + jspPage);
         request.getRequestDispatcher("/WEB-INF/JSP/page-template.jsp").forward(request, response);
     }
 

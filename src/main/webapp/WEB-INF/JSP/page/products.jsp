@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+PRODUTS
 <c:forEach var="p" items="${products }">
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xlg-2">
     <div id="product${product.id }" class="panel panel-default product">

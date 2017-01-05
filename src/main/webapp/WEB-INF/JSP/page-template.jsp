@@ -5,6 +5,7 @@
   <link href="/static/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
+fragment
 <header>
   <jsp:include page="fragment/header.jsp" />
 </header>
@@ -14,7 +15,9 @@
       <jsp:include page="fragment/aside.jsp" />
     </aside>
     <main>
-      <jsp:include page="${currentPage }" />
+      <jsp:include page="${CURRENT_PAGE}" />
+      <%--<jsp:include page="page/products.jsp" />--%>
+
     </main>
   </div>
 </div>
