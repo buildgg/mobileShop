@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 @WebFilter(urlPatterns = "/*")
-public class LoadPropertiesFilter extends AbstractFilter implements Filter {
+public class LoadPropertiesFilter extends AbstractFilter /*implements Filter */{
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -20,7 +20,7 @@ public class LoadPropertiesFilter extends AbstractFilter implements Filter {
         Properties prop = new Properties();
         prop.load(LoadPropertiesFilter.class.getClassLoader().getResourceAsStream("application.properties"));
         Boolean isProdaction = Boolean.valueOf(prop.getProperty("application.prodaction"));
-        System.out.println("PROPERTIES = " + isProdaction);
+        System.out.println("PROPERTIES test = " + isProdaction);
         chain.doFilter(request, response);
 
     }
