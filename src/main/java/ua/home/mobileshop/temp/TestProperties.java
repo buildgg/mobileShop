@@ -11,6 +11,6 @@ public class TestProperties {
         Properties prop = new Properties();
         prop.load(TestProperties.class.getClassLoader().getResourceAsStream("application.properties"));
         Boolean isProdaction = Boolean.valueOf(prop.getProperty("application.prodaction"));
-        System.out.println("PROPERTIES = " + isProdaction);
+       // System.out.println("PROPERTIES = " + isProdaction);
     }
 }
