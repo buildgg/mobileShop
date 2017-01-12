@@ -17,7 +17,6 @@ public class ErrorHandler extends AbstractFilter /*implements Filter */ {
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        System.out.println("HEllo");
         try {
             chain.doFilter(request, response);
         } catch (Throwable e) {

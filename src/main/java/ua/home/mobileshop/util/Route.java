@@ -14,6 +14,8 @@ public final class Route {
     public static void forwardToFragment(String jspFragment, HttpServletRequest request,
                                          HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/JSP/fragment/" + jspFragment).forward(request, response);
+
+
     }
 
     public static void forwarToPage(String jspPage, HttpServletRequest request, HttpServletResponse response)

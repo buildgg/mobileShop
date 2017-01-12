@@ -1,5 +1,6 @@
-package ua.home.mobileshop.servlet;
+package ua.home.mobileshop.servlet.page;
 
+import ua.home.mobileshop.servlet.AbstractController;
 import ua.home.mobileshop.util.Route;
 
 import javax.servlet.ServletException;

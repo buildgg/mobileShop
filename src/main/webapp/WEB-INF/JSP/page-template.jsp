@@ -2,22 +2,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MobileShop</title>
   <link href="/static/css/bootstrap.css" rel="stylesheet">
+  <link href="/static/css/bootstrap-theme.css" rel="stylesheet">
+  <link href="/static/css/font-awesome.css" rel="stylesheet">
+  <link href="/static/css/app.css" rel="stylesheet">
 </head>
 <body>
-fragment
 <header>
   <jsp:include page="fragment/header.jsp" />
 </header>
 <div class="container-fluid">
   <div class="row">
-    <aside>
+    <aside class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
       <jsp:include page="fragment/aside.jsp" />
     </aside>
-    <main>
+    <main class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
       <jsp:include page="${CURRENT_PAGE}" />
-      <%--<jsp:include page="page/products.jsp" />--%>
-
     </main>
   </div>
 </div>
@@ -25,5 +29,7 @@ fragment
   <jsp:include page="fragment/footer.jsp" />
 </footer>
 <script src="/static/js/jquery.js"></script>
+<script src="/static/js/bootstrap.js"></script>
+<script src="/static/js/app.js"></script>
 </body>
 </html>
