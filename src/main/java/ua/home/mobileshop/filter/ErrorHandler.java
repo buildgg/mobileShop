@@ -21,7 +21,7 @@ public class ErrorHandler extends AbstractFilter /*implements Filter */ {
             chain.doFilter(request, response);
         } catch (Throwable e) {
             String requestUri = request.getRequestURI();
-            LOGGER.error("requestUri = " + requestUri + " failed = " + e.getMessage(), e);
+            LOGGER.error("requestUri = ::: " + requestUri + " failed ::: = " + e.getMessage(), e);
             Route.forwarToPage("error.jsp", request, response);
         }
 

@@ -23,9 +23,14 @@ public class AllProductsController extends AbstractController {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+      /*  int pageParam = getParamPage(req);*/
         List<Product> productList = getProductService().getAllProducts(1, ConstantsView.MAX_PRODUCTS_ON_PAGE);
-        LOGGER.info(":::Products List " + productList.isEmpty()+ " /n ");
         req.setAttribute(ConstantsView.ATTRIBUTE_PRODUCTS, productList);
+
+        int totalCount = getProductService().getCountProducts();
+        int pageCount = getPageCount(totalCount, ConstantsView.MAX_PRODUCTS_ON_PAGE);
+        req.setAttribute(ConstantsView.PAGE_COUNT, pageCount);
+
         Route.forwarToPage("products.jsp", req, resp);
 
     }

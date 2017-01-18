@@ -19,7 +19,8 @@ import java.util.List;
 public class LoadMoreProducts extends AbstractController {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> productList = getProductService().getAllProducts(2, ConstantsView.MAX_PRODUCTS_ON_PAGE);
+        int pageParam = getParamPage(req);
+        List<Product> productList = getProductService().getAllProducts(pageParam, ConstantsView.MAX_PRODUCTS_ON_PAGE);
         req.setAttribute(ConstantsView.ATTRIBUTE_PRODUCTS, productList);
         Route.forwardToFragment("product-list.jsp",req,resp);
     }

@@ -10,6 +10,7 @@ import java.sql.SQLException;
  */
 public final class JDBCUtils {
     public static <T> T select(Connection c, String sql, ResultSetHandler<T> resultSetHandler, Object ...parameters) throws SQLException {
+        System.out.println("SQL::::::: " + sql);
         try(PreparedStatement ps = c.prepareStatement(sql)){
             populatePreparedStatement(ps, parameters);
             ResultSet rs = ps.executeQuery();
@@ -22,6 +23,7 @@ public final class JDBCUtils {
     private static void populatePreparedStatement(PreparedStatement ps, Object...parameters) throws SQLException {
         if (parameters != null){
             for (int i = 0; i < parameters.length; i++){
+                System.out.println("PARAM::::: " + parameters[i]);
                 ps.setObject(i + 1, parameters[i]);
             }
         }

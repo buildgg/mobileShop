@@ -10,7 +10,7 @@
         <div class="panel-heading">Find products</div>
         <div class="panel-body">
             <div class="input-group">
-                <input type="text" name="query" class="form-control" placeholder="Search query">
+                <input type="text" name="query" class="form-control" placeholder="Search query" value="${SEARCHFORM.query}">
                   <span class="input-group-btn">
                     <a id="goSearch" class="btn btn-default">Go!</a>
                   </span>
@@ -19,14 +19,15 @@
                 <a data-toggle="collapse" href="#searchOptions">More filters <span class="caret"></span></a>
             </div>
         </div>
-        <div id="searchOptions" class="collapse">
+        <div id="searchOptions" class="collapse ${!SEARCHFORM.categoriesEmpty or !SEARCHFORM.producersEmpty ? 'in': ''}">
             <div class="panel-heading">Category filters</div>
             <div class="panel-body categories">
                 <label> <input type="checkbox" id="allCategories"> All </label>
                 <c:forEach var="search_cat" items="${CATEGORIES}">
                     <div class="form-group">
                         <div class="checkbox">
-                            <label><input type="checkbox" name="category" value="1" class="search-option">
+                            <label><input type="checkbox" name="category" value="${search_cat.id}"
+                            ${SEARCHFORM.categories.contains(search_cat.id) ? 'checked': ''} class="search-option">
                             ${search_cat.name}(${search_cat.productCount})</label>
                         </div>
                     </div>
@@ -38,7 +39,8 @@
                 <c:forEach var="search_producer" items="${PRODUCERS}">
                     <div class="form-group">
                         <div class="checkbox">
-                            <label><input type="checkbox" name="producer" value="1" class="search-option">
+                            <label><input type="checkbox" name="producer" value="${search_producer.id}"
+                                          ${SEARCHFORM.producers.contains(search_producer.id) ? 'checked': ''} class="search-option">
                                ${search_producer.name}(${search_producer.productCont})</label>
                         </div>
                     </div>
@@ -55,7 +57,7 @@
     <div class="panel-heading">Product catalog</div>
     <div class="list-group">
         <c:forEach var="cat" items="${CATEGORIES}">
-            <a href="/products${cat.url}" class="list-group-item"> <span
+            <a href="/products${cat.url}" class="list-group-item ${SELECTED_CATEGORY_URL == cat.url ? 'active' : ''}"> <span
                     class="badge">${cat.productCount}</span> ${cat.name}</a>
         </c:forEach>
     </div>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Properties;
 
-@WebFilter(urlPatterns = "/*")
+
 public class LoadPropertiesFilter extends AbstractFilter /*implements Filter */{
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

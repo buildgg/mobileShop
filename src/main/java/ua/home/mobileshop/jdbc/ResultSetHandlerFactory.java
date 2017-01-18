@@ -33,7 +33,7 @@ public final class ResultSetHandlerFactory {
         public Category handle(ResultSet rs) throws SQLException {
             Category category = new Category();
             category.setName(rs.getString("name"));
-            //category.setId(rs.getInt("id"));
+            category.setId(rs.getInt("id"));
             category.setUrl(rs.getString("url"));
             category.setProductCount(rs.getInt("product_count"));
             return category;
@@ -44,7 +44,7 @@ public final class ResultSetHandlerFactory {
         @Override
         public Producer handle(ResultSet rs) throws SQLException {
             Producer producer = new Producer();
-            //producer.setId(rs.getInt("id"));
+            producer.setId(rs.getInt("id"));
             producer.setName(rs.getString("name"));
             producer.setProductCont(rs.getInt("product_count"));
             return producer;
@@ -75,6 +75,18 @@ public final class ResultSetHandlerFactory {
                     list.add(oneRowResultSetHandler.handle(rs));
                 }
                 return list;
+            }
+        };
+    }
+    public final static ResultSetHandler<Integer> getCountResultSetHandler() {
+        return new ResultSetHandler<Integer>() {
+            @Override
+            public Integer handle(ResultSet rs) throws SQLException {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                } else {
+                    return 0;
+                }
             }
         };
     }

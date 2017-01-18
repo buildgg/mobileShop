@@ -1,11 +1,13 @@
 package ua.home.mobileshop.servlet;
 
+import ua.home.mobileshop.form.SearchForm;
 import ua.home.mobileshop.service.OrderService;
 import ua.home.mobileshop.service.ProductService;
 import ua.home.mobileshop.service.impl.ServiceManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by vov on 04.01.2017.
@@ -26,5 +28,28 @@ public abstract class AbstractController extends HttpServlet {
 
     public final OrderService getOrderService() {
         return orderService;
+    }
+
+    public final int getPageCount(int totalCount, int itemsPerPage){
+        int res = totalCount/itemsPerPage;
+        if (res * itemsPerPage != totalCount){
+            res++;
+        }
+        return res;
+    }
+    public final int getParamPage(HttpServletRequest request){
+      try{
+          return Integer.parseInt(request.getParameter("page"));
+    }catch(NumberFormatException e){
+          return 1;
+      }
+    }
+
+    public final SearchForm createSearchForm(HttpServletRequest request) {
+        return new SearchForm(request.getParameter("query"),
+                request.getParameterValues("category"),
+                request.getParameterValues("producer")
+        );
+
     }
 }

@@ -24,6 +24,10 @@ public class ProductsByCategory extends AbstractController {
 
         List<Product> productList = getProductService().getProductsByCategory(category, 1, ConstantsView.MAX_PRODUCTS_ON_PAGE);
         req.setAttribute(ConstantsView.ATTRIBUTE_PRODUCTS, productList);
+        req.setAttribute(ConstantsView.SELECTED_CATEGORY_URL, category);
+        int totalCount = getProductService().getCountProductsByCategory(category);
+        req.setAttribute(ConstantsView.PAGE_COUNT, getPageCount(totalCount, ConstantsView.MAX_PRODUCTS_ON_PAGE));
+
         Route.forwarToPage("products.jsp", req, resp);
 
     }
