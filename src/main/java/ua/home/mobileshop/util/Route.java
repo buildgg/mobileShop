@@ -1,5 +1,7 @@
 package ua.home.mobileshop.util;
 
+import org.json.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +37,11 @@ public final class Route {
             throws IOException {
         response.sendRedirect(url);
 
+    }
+    public static void sendJSON(JSONObject json, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.getWriter().print(json.toString());
+        response.getWriter().close();
     }
 
 

@@ -1,4 +1,5 @@
-<%@ tag language="java" trimDirectiveWhitespaces="true" %>
+<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+
 <div id="addProductPopup" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -26,7 +27,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <img id="addToCartIndicator" src="/static/img/loading.gif" class="hidden" alt="Loading...">
                 <button id="addToCart" type="button" class="btn btn-primary">Add to Cart</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>

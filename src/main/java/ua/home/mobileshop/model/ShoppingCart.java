@@ -56,15 +56,15 @@ public class ShoppingCart {
     }
 
     private void validateProductCount(int count) {
-        if(count > ConstantsOrder.MAX_PRODUCT_COUNT_PER_SHOPPING_CART){
-            throw new ValidationException("Limit for product count reached: count="+count);
+        if (count > ConstantsOrder.MAX_PRODUCT_COUNT_PER_SHOPPING_CART) {
+            throw new ValidationException("Limit for product count reached: count=" + count);
         }
     }
 
-    private void validateShoppingCartSize(int idProduct){
-        if(products.size() > ConstantsOrder.MAX_PRODUCTS_PER_SHOPPING_CART ||
+    private void validateShoppingCartSize(int idProduct) {
+        if (products.size() > ConstantsOrder.MAX_PRODUCTS_PER_SHOPPING_CART ||
                 (products.size() == ConstantsOrder.MAX_PRODUCTS_PER_SHOPPING_CART && !products.containsKey(idProduct))) {
-            throw new ValidationException("Limit for ShoppingCart size reached: size="+products.size());
+            throw new ValidationException("Limit for ShoppingCart size reached: size=" + products.size());
         }
     }
 

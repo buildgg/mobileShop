@@ -1,5 +1,6 @@
 package ua.home.mobileshop.servlet;
 
+import ua.home.mobileshop.form.ProductForm;
 import ua.home.mobileshop.form.SearchForm;
 import ua.home.mobileshop.service.OrderService;
 import ua.home.mobileshop.service.ProductService;
@@ -50,6 +51,9 @@ public abstract class AbstractController extends HttpServlet {
                 request.getParameterValues("category"),
                 request.getParameterValues("producer")
         );
-
+    }
+    public final ProductForm createProductForm(HttpServletRequest request){
+        return new ProductForm(Integer.parseInt(request.getParameter("idProduct")),
+                Integer.parseInt(request.getParameter("count")));
     }
 }

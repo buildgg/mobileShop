@@ -27,7 +27,7 @@ public class ServiceManager {
     private ServiceManager(ServletContext context) {
         loadApplicationPropertie();
         dataSource = getDataSource();
-        orderService = new OrderServiceImpl();
+        orderService = new OrderServiceImpl(dataSource);
 
         productService = new ProductServiceImpl(dataSource);
 

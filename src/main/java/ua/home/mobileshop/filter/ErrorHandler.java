@@ -22,6 +22,7 @@ public class ErrorHandler extends AbstractFilter /*implements Filter */ {
         } catch (Throwable e) {
             String requestUri = request.getRequestURI();
             LOGGER.error("requestUri = ::: " + requestUri + " failed ::: = " + e.getMessage(), e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             Route.forwarToPage("error.jsp", request, response);
         }
 
