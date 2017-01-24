@@ -19,7 +19,7 @@
                 <a data-toggle="collapse" href="#searchOptions">More filters <span class="caret"></span></a>
             </div>
         </div>
-        <div id="searchOptions" class="collapse ${!SEARCHFORM.categoriesEmpty or !SEARCHFORM.producersEmpty ? 'in': ''}">
+        <div id="searchOptions" class="collapse ${SEARCHFORM.categoriesNotEmpty or SEARCHFORM.producersNotEmpty ? 'in': ''}">
             <div class="panel-heading">Category filters</div>
             <div class="panel-body categories">
                 <label> <input type="checkbox" id="allCategories"> All </label>

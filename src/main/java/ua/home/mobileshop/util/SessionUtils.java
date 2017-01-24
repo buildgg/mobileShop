@@ -1,5 +1,6 @@
 package ua.home.mobileshop.util;
 
+import ua.home.mobileshop.model.CurrentAccount;
 import ua.home.mobileshop.model.ShoppingCart;
 
 import javax.servlet.http.Cookie;
@@ -34,6 +35,25 @@ public class SessionUtils {
     }
     public static Cookie findShoppingCartCookie(HttpServletRequest req) {
         return WebUtils.findCookie(req, ConstantsOrder.Cookie.SHOPPING_CART.getName());
+    }
+    public static CurrentAccount getCurrentAccount(HttpServletRequest request){
+        return (CurrentAccount)request.getSession().getAttribute(ConstantsOrder.CURRENT_ACCOUNT);
+    }
+    public static void setCurrentAccount(CurrentAccount currentAccount, HttpServletRequest request){
+       request.getSession().setAttribute(ConstantsOrder.CURRENT_ACCOUNT, currentAccount);
+    }
+
+    public static boolean isCurrentAccountCreated(HttpServletRequest request){
+        return getCurrentAccount(request) != null;
+    }
+    public static void setCurrentPage(HttpServletRequest request){
+        request.getSession().setAttribute(ConstantsView.CURRENT_PAGE, request.getRequestURI());
+    }
+    public static void setCurrentPage(HttpServletRequest request, String s){
+        request.getSession().setAttribute(ConstantsView.CURRENT_PAGE, s);
+    }
+    public static String getCurrentPage(HttpServletRequest request){
+        return (String)request.getSession().getAttribute(ConstantsView.CURRENT_PAGE);
     }
 
 }

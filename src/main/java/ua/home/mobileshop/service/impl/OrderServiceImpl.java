@@ -2,14 +2,17 @@ package ua.home.mobileshop.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ua.home.mobileshop.entity.Account;
 import ua.home.mobileshop.entity.Product;
 import ua.home.mobileshop.exeption.InternalServerErrorException;
 import ua.home.mobileshop.form.ProductForm;
 import ua.home.mobileshop.jdbc.JDBCUtils;
 import ua.home.mobileshop.jdbc.ResultSetHandler;
 import ua.home.mobileshop.jdbc.ResultSetHandlerFactory;
+import ua.home.mobileshop.model.CurrentAccount;
 import ua.home.mobileshop.model.ShoppingCart;
 import ua.home.mobileshop.model.ShoppingCartItem;
+import ua.home.mobileshop.model.SocialAccount;
 import ua.home.mobileshop.service.OrderService;
 
 import javax.sql.DataSource;
@@ -23,6 +26,9 @@ class OrderServiceImpl implements OrderService {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderServiceImpl.class);
     private static final ResultSetHandler<Product> productResultSetHandler =
             ResultSetHandlerFactory.getSingleResultSetHandler(ResultSetHandlerFactory.PRODUCT_RESULT_SET_HANDLER);
+
+    private static final ResultSetHandler<Account> accountResultSetHandler =
+            ResultSetHandlerFactory.getSingleResultSetHandler(ResultSetHandlerFactory.ACCOUNT_RESULT_SET_HANDLER);
     private final DataSource dataSource;
 
     public OrderServiceImpl(DataSource dataSource) {
@@ -79,5 +85,20 @@ class OrderServiceImpl implements OrderService {
             }
         }
         return shoppingCart.getItems().isEmpty() ? null : shoppingCart;
+    }
+
+    @Override
+    public CurrentAccount authentificate(SocialAccount socialAccount) {
+        try (Connection c = dataSource.getConnection()) {
+            Account account = JDBCUtils.select(c, "select * from account where email=?", accountResultSetHandler, socialAccount.getEmail());
+            if (account == null) {
+                account = new Account(socialAccount.getName(), socialAccount.getEmail());
+                account = JDBCUtils.insert(c, "insert into account values (nextval('account_seq'),?,?)", accountResultSetHandler, account.getName(), account.getEmail());
+                c.commit();
+            }
+            return account;
+        } catch (SQLException e) {
+            throw new InternalServerErrorException("Can't execute SQL request: " + e.getMessage(), e);
+        }
     }
 }

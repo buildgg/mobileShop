@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="mobile-shop" tagdir="/WEB-INF/tags" %>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -23,7 +25,19 @@
                     </div>
                 </li>
             </ul>
-            <a href="#" class="btn btn-primary navbar-btn navbar-right sign-in"><i class="fa fa-facebook-official" aria-hidden="true"></i> Sign in</a>
+            <c:choose>
+                <c:when test="${CURRENT_ACCOUNT != null }">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a>Welcome ${CURRENT_ACCOUNT.description }</a></li>
+                        <li><a href="/my-orders">My orders</a></li>
+                        <li><mobile-shop:sign-out/></li>
+                       <%-- <li><a href="/sign-out">Sign out</a></li>--%>
+                    </ul>
+                </c:when>
+                <c:otherwise>
+                    <mobile-shop:sign-in/>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 </nav>

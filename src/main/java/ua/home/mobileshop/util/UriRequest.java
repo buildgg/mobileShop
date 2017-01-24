@@ -19,6 +19,10 @@ public class UriRequest {
     public static boolean isAjaxHtmlUrl(String url) {
         return url.startsWith("/ajax/html/");
     }
+
+    public static boolean isCurrentPageRedirect(String url){
+         return url.startsWith("/products")|| url.startsWith("/search")||url.startsWith("/shopping-cart");
+    }
     private UriRequest(){
 
     }

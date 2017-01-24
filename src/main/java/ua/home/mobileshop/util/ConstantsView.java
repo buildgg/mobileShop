@@ -11,6 +11,7 @@ public final class ConstantsView {
     public static final String SELECTED_CATEGORY_URL = "SELECTED_CATEGORY_URL";
     public static final String PAGE_COUNT = "PAGE_COUNT";
     public static final String SEARCHFORM = "SEARCHFORM";
+    public static final String CURRENT_PAGE = "CURRENT_PAGE";
 
 
 

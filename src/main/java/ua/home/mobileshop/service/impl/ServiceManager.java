@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.home.mobileshop.service.OrderService;
 import ua.home.mobileshop.service.ProductService;
+import ua.home.mobileshop.service.SocialService;
 
 import javax.servlet.ServletContext;
 import java.io.IOException;
@@ -22,13 +23,14 @@ public class ServiceManager {
 
     private final OrderService orderService;
     private final ProductService productService;
+    private final SocialService socialService;
     private final Properties applicationProperties = new Properties();
     private final BasicDataSource dataSource;
     private ServiceManager(ServletContext context) {
         loadApplicationPropertie();
         dataSource = getDataSource();
         orderService = new OrderServiceImpl(dataSource);
-
+        socialService = new FacebookSocialService(this);
         productService = new ProductServiceImpl(dataSource);
 
     }
@@ -46,16 +48,16 @@ public class ServiceManager {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDefaultAutoCommit(false);
         dataSource.setRollbackOnReturn(true);
-        LOGGER.info("Driver = " + getApplicatopnProperty("db.driver") +
-        "User name = " + getApplicatopnProperty("db.username")+
-        "URL = " + getApplicatopnProperty("db.url")+
-        "pas = " + getApplicatopnProperty("db.password"));
-        dataSource.setDriverClassName(getApplicatopnProperty("db.driver"));
-        dataSource.setUrl(getApplicatopnProperty("db.url"));
-        dataSource.setUsername(getApplicatopnProperty("db.username"));
-        dataSource.setPassword(getApplicatopnProperty("db.password"));
-        dataSource.setInitialSize(Integer.parseInt(getApplicatopnProperty("db.pool.initSize")));
-        dataSource.setMaxTotal(Integer.parseInt(getApplicatopnProperty("db.pool.maxSize")));
+        LOGGER.info("Driver = " + getApplicationProperty("db.driver") +
+        "User name = " + getApplicationProperty("db.username")+
+        "URL = " + getApplicationProperty("db.url")+
+        "pas = " + getApplicationProperty("db.password"));
+        dataSource.setDriverClassName(getApplicationProperty("db.driver"));
+        dataSource.setUrl(getApplicationProperty("db.url"));
+        dataSource.setUsername(getApplicationProperty("db.username"));
+        dataSource.setPassword(getApplicationProperty("db.password"));
+        dataSource.setInitialSize(Integer.parseInt(getApplicationProperty("db.pool.initSize")));
+        dataSource.setMaxTotal(Integer.parseInt(getApplicationProperty("db.pool.maxSize")));
 
 
         return dataSource;
@@ -68,7 +70,12 @@ public class ServiceManager {
     public ProductService getProductService() {
         return productService;
     }
-    public String getApplicatopnProperty(String key){
+
+    public SocialService getSocialService() {
+        return socialService;
+    }
+
+    public String getApplicationProperty(String key){
         return applicationProperties.getProperty(key);
     }
 

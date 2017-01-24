@@ -18,7 +18,7 @@ public class ShowShoppingCart extends AbstractController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        SessionUtils.setCurrentPage(req);
        if (SessionUtils.isCurrentShoppingCartCreated(req)){
         Route.forwarToPage("shopping-cart.jsp", req, resp);
        }else {

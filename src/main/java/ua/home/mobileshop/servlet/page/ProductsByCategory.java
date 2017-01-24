@@ -4,6 +4,7 @@ import ua.home.mobileshop.entity.Product;
 import ua.home.mobileshop.servlet.AbstractController;
 import ua.home.mobileshop.util.ConstantsView;
 import ua.home.mobileshop.util.Route;
+import ua.home.mobileshop.util.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +20,7 @@ import java.util.List;
 public class ProductsByCategory extends AbstractController {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SessionUtils.setCurrentPage(req);
         String uri = req.getRequestURI();
         String category = uri.substring("products/".length());
 

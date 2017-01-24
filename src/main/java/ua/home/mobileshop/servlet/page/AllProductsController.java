@@ -6,6 +6,7 @@ import ua.home.mobileshop.entity.Product;
 import ua.home.mobileshop.servlet.AbstractController;
 import ua.home.mobileshop.util.ConstantsView;
 import ua.home.mobileshop.util.Route;
+import ua.home.mobileshop.util.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,8 @@ public class AllProductsController extends AbstractController {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
       /*  int pageParam = getParamPage(req);*/
+        SessionUtils.setCurrentPage(req);
+
         List<Product> productList = getProductService().getAllProducts(1, ConstantsView.MAX_PRODUCTS_ON_PAGE);
         req.setAttribute(ConstantsView.ATTRIBUTE_PRODUCTS, productList);
 

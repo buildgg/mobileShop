@@ -1,5 +1,6 @@
 package ua.home.mobileshop.jdbc;
 
+import ua.home.mobileshop.entity.Account;
 import ua.home.mobileshop.entity.Category;
 import ua.home.mobileshop.entity.Producer;
 import ua.home.mobileshop.entity.Product;
@@ -48,6 +49,17 @@ public final class ResultSetHandlerFactory {
             producer.setName(rs.getString("name"));
             producer.setProductCont(rs.getInt("product_count"));
             return producer;
+        }
+    };
+
+    public static final ResultSetHandler<Account> ACCOUNT_RESULT_SET_HANDLER = new ResultSetHandler<Account>() {
+        @Override
+        public Account handle(ResultSet rs) throws SQLException {
+            Account account = new Account();
+            account.setId(rs.getInt("id"));
+            account.setName(rs.getString("name"));
+            account.setEmail(rs.getString("email"));
+            return account;
         }
     };
 
