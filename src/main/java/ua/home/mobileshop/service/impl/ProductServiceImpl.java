@@ -24,8 +24,7 @@ class ProductServiceImpl implements ProductService {
             ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.CATEGORY_RESULT_SET_HANDLER);
     public static final ResultSetHandler<List<Producer>> producerResultSetHandler =
             ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.PRODUCER_RESULT_SET_HANDLER);
-    public static final ResultSetHandler<Integer> productCountResultSet =
-            ResultSetHandlerFactory.getCountResultSetHandler();
+    public static final ResultSetHandler<Integer> productCountResultSet = ResultSetHandlerFactory.getCountResultSetHandler();
     private static final ResultSetHandler<List<Product>> productsResultSetHandler =
             ResultSetHandlerFactory.getListResultSetHandler(ResultSetHandlerFactory.PRODUCT_RESULT_SET_HANDLER);
     private DataSource dataSource;

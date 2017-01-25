@@ -20,7 +20,6 @@ import java.util.List;
 public class SignInController extends AbstractController {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("GET");
         if (SessionUtils.isCurrentAccountCreated(req)) {
            if (UriRequest.isCurrentPageRedirect(SessionUtils.getCurrentPage(req))){
                Route.redirect(SessionUtils.getCurrentPage(req), req, resp);
@@ -39,14 +38,10 @@ public class SignInController extends AbstractController {
                     UriRequest.isCurrentPageRedirect(SessionUtils.getCurrentPage(req))) {
                 Route.redirect(SessionUtils.getCurrentPage(req), req, resp);
             }else {
-                System.out.println("POST YES");
                 Route.redirect("/my-orders", req, resp);
             }
 
         } else {
-            System.out.println("POST NO");
-            System.out.println(SessionUtils.getCurrentPage(req));
-            System.out.println(getSocialService().getAuthorizeUrl());
             Route.redirect(getSocialService().getAuthorizeUrl(), req, resp);
         }
     }

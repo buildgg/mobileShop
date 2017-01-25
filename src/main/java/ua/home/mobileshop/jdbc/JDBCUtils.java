@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by vov on 12.01.2017.
@@ -37,6 +38,16 @@ public final class JDBCUtils {
             return resultSetHandler.handle(rs);
         }
     }
+     public static void insertBatch(Connection c, String sql, List<Object[]> parametersList) throws SQLException {
+            try(PreparedStatement ps = c.prepareStatement(sql)) {
+                for(Object[] params : parametersList){
+                    populatePreparedStatement(ps, params);
+                    ps.addBatch();
+                }
+                ps.executeBatch();
+            }
+     }
+
     private JDBCUtils() {
     }
 }

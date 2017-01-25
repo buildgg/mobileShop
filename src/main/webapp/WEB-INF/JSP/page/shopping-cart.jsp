@@ -7,8 +7,8 @@
 
 <div id="shoppingCart">
     <c:if test="${CURRENT_ACCOUNT== null}">
-    <div class="alert alert-warning hidden-print" role="alert">To make order, please sign in</div>
-     </c:if>
+        <div class="alert alert-warning hidden-print" role="alert">To make order, please sign in</div>
+    </c:if>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -22,22 +22,26 @@
         <c:forEach var="cart" items="${CURRENT_SHOPPING_CART.items}">
             <tr id="product${cart.product.id}" class="item">
                 <td class="text-center">
-                    <img class="small" src="${cart.product.imageLink}" alt="${cart.product.name}"><br>${cart.product.name}
+                    <img class="small" src="${cart.product.imageLink}"
+                         alt="${cart.product.name}"><br>${cart.product.name}
                 </td>
                 <td class="price">$${cart.product.price}</td>
                 <td class="count">${cart.count}</td>
                 <td class="hidden-print">
-                <c:choose>
-                <c:when test="${cart.count > 1}">
+                    <c:choose>
+                        <c:when test="${cart.count > 1}">
 
-                    <a class="btn btn-danger remove-product" data-id-product="${cart.product.id}" data-count="1">Remove one</a><br>
-                    <a class="btn btn-danger remove-product all" data-id-product="${cart.product.id}" data-count="${cart.count}">Remove all</a>
+                            <a class="btn btn-danger remove-product" data-id-product="${cart.product.id}"
+                               data-count="1">Remove one</a><br>
+                            <a class="btn btn-danger remove-product all" data-id-product="${cart.product.id}"
+                               data-count="${cart.count}">Remove all</a>
 
-                </c:when>
-                <c:otherwise>
-                    <a class="btn btn-danger remove-product" data-id-product="${cart.product.id}" data-count="1">Remove one</a>
-                </c:otherwise>
-                </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            <a class="btn btn-danger remove-product" data-id-product="${cart.product.id}"
+                               data-count="1">Remove one</a>
+                        </c:otherwise>
+                    </c:choose>
                 </td>
             </tr>
         </c:forEach>
@@ -47,14 +51,33 @@
         </tr>
         </tbody>
     </table>
+    <%--    <div class="row hidden-print">
+            <div class="col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+                <a class="btn btn-primary btn-block"><i class="fa fa-facebook-official" aria-hidden="true"></i> Sign in</a>
+            </div>
+        </div>--%>
 <%--    <div class="row hidden-print">
         <div class="col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
-            <a class="btn btn-primary btn-block"><i class="fa fa-facebook-official" aria-hidden="true"></i> Sign in</a>
+            <c:choose>
+                <c:when test="${CURRENT_ACCOUNT != null}">
+                    <a href="javascript:void(0);" class="post-request btn btn-primary btn-block" data-url="/order">Make order</a>
+                </c:when>
+                <c:otherwise>
+                    <mobile-shop:sign-in />
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>--%>
-    <c:if test="${CURRENT_ACCOUNT== null}">
-    <div class="col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
-        <mobile-shop:sign-in/>
+    <div class="row hidden-print">
+        <div class="col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
+            <c:choose>
+                <c:when test="${CURRENT_ACCOUNT != null }">
+                    <a href="javascript:void(0);" class="post-request btn btn-primary btn-block" data-url="/order">Make order</a>
+                </c:when>
+                <c:otherwise>
+                    <mobile-shop:sign-in />
+                </c:otherwise>
+            </c:choose>
+        </div>
     </div>
-    </c:if>
 </div>

@@ -5,14 +5,14 @@ package ua.home.mobileshop.util;
  */
 public class ConstantsOrder {
     public static final String CURRENT_SHOPPING_CART = "CURRENT_SHOPPING_CART";
-
     public static final int MAX_PRODUCT_COUNT_PER_SHOPPING_CART = 10;
-
     public static final int MAX_PRODUCTS_PER_SHOPPING_CART = 20;
-
     public static final String ACCOUNT_ACTIONS_HISTORY = "ACCOUNT_ACTIONS_HISTORY";
     public static final String CURRENT_ACCOUNT = "CURRENT_ACCOUNT";
-
+    public static final String ORDER = "ORDER";
+    public static final int MAX_ORDER_PAGE = 5;
+    public static final String PAGE_COUNT_ORDER = "PAGE_COUNT_ORDER";
+    public static final String ORDER_LIST = "ORDER_LIST";
 
     public enum Cookie {
         //1 year ttl

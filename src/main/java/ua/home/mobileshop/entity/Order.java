@@ -1,7 +1,8 @@
 package ua.home.mobileshop.entity;
 
 import java.math.BigDecimal;
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Order extends AbstractEntity<Long> {

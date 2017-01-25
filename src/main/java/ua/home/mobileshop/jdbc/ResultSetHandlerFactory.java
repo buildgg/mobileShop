@@ -1,9 +1,6 @@
 package ua.home.mobileshop.jdbc;
 
-import ua.home.mobileshop.entity.Account;
-import ua.home.mobileshop.entity.Category;
-import ua.home.mobileshop.entity.Producer;
-import ua.home.mobileshop.entity.Product;
+import ua.home.mobileshop.entity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +23,7 @@ public final class ResultSetHandlerFactory {
             product.setName(rs.getString("name"));
             product.setPrice(rs.getBigDecimal("price"));
             product.setProducer(rs.getString("producer"));
-        return product;
+            return product;
         }
     };
     public static final ResultSetHandler<Category> CATEGORY_RESULT_SET_HANDLER = new ResultSetHandler<Category>() {
@@ -62,6 +59,29 @@ public final class ResultSetHandlerFactory {
             return account;
         }
     };
+    public static final ResultSetHandler<OrderItem> ORDER_ITEM_RESULT_SET_HANDLER = new ResultSetHandler<OrderItem>() {
+        @Override
+        public OrderItem handle(ResultSet rs) throws SQLException {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setId(rs.getLong("id"));
+            orderItem.setCount(rs.getInt("count"));
+            orderItem.setIdOrder(rs.getLong("id_order"));
+            Product product = PRODUCT_RESULT_SET_HANDLER.handle(rs);
+            orderItem.setProduct(product);
+            return orderItem;
+        }
+    };
+    public static final ResultSetHandler<Order> ORDER_RESULT_SET_HANDLER = new ResultSetHandler<Order>() {
+        @Override
+        public Order handle(ResultSet rs) throws SQLException {
+            Order order = new Order();
+            order.setId(rs.getLong("id"));
+            order.setCreated(rs.getTimestamp("created"));
+            order.setIdAccount(rs.getInt("id_account"));
+            return order;
+        }
+    };
+
 
     public final static <T> ResultSetHandler<T> getSingleResultSetHandler(final ResultSetHandler<T> oneRowResultSetHandler) {
         return new ResultSetHandler<T>() {
@@ -90,6 +110,7 @@ public final class ResultSetHandlerFactory {
             }
         };
     }
+
     public final static ResultSetHandler<Integer> getCountResultSetHandler() {
         return new ResultSetHandler<Integer>() {
             @Override
